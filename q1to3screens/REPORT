@@ -1,0 +1,281 @@
+Programming in C – Project 1 Report
+Student: Liata Ornella Sifa
+Project: Programming in C – Project 1
+Repository: Programming-in-c-Project-1_Assignment
+1. Introduction
+This project demonstrates the application of C programming concepts in both general-purpose and embedded-system scenarios. The project consists of four tasks covering sensor monitoring, transaction processing, functions and recursion, and an Arduino-based smart parking system.
+The first three tasks were implemented using the C programming language, while the fourth task was designed and simulated using an Arduino Uno in Tinkercad Circuits.
+The project focuses on applying fundamental programming concepts such as variables, data types, conditional statements, loops, functions, recursion, arrays, input validation, and embedded-system control.
+2. Project Objectives
+The main objectives of this project were to:
+- Develop and compile C programs.
+- Apply variables and appropriate data types.
+- Use conditional statements for decision-making.
+- Use loops for repeated operations.
+- Implement user-defined functions.
+- Apply recursion to solve a problem.
+- Validate user input and handle invalid operations.
+- Understand the C compilation lifecycle.
+- Apply C programming concepts to an embedded-system application.
+- Design and simulate an Arduino-based smart parking system.
+- Demonstrate the interaction between sensors, processing logic, and output devices.
+3. Question 1 – Sensor Monitoring System
+3.1 Objective
+The objective of Question 1 was to develop a C program for a simplified water-quality monitoring system.
+The program receives:
+- Temperature in degrees Celsius.
+- Turbidity in NTU.
+It then calculates a water-quality index and classifies the water as Good, Warning, or Critical.
+3.2 Water-Quality Calculation
+The water-quality index is calculated using:
+Index = 100 - (TemperatureDeviation + TurbidityPenalty)
+
+Where:
+TemperatureDeviation = |Temperature - 25|
+TurbidityPenalty = Turbidity / 2
+
+The classification is:
+Index	Status
+80 or above	Good
+60–79.99	Warning
+Below 60	Critical
+
+
+3.3 Implementation
+The program uses a separate function to calculate or classify part of the water-quality result. This demonstrates the use of user-defined functions instead of placing all logic inside main().
+Source file: question1.c
+Insert Question 1 code screenshot here
+Figure 1: Question 1 C source code
+3.4 Sample Output
+A test run was performed after compiling the program.
+Insert your Question 1 terminal screenshot here
+Figure 2: Question 1 sample output
+The output displays the temperature, turbidity, calculated water-quality index, and corresponding water-quality status.
+3.5 Real-World Application of C
+C is widely used in embedded systems such as sensors, microcontrollers, medical devices, automotive systems, and industrial control systems.
+For example, C can be used in a water-quality monitoring device to read sensor values, process the measurements, and control outputs. C is suitable for embedded systems because it provides efficient execution, direct access to hardware resources, and relatively low memory overhead.
+3.6 Error Analysis
+Syntax Error
+One possible syntax error would be forgetting a semicolon:
+int temperature = 25
+
+The correct statement is:
+int temperature = 25;
+
+This is a syntax error because the statement does not follow the grammatical rules of the C language. The compiler will detect the problem.
+Semantic Error
+A possible semantic error would be using the wrong formula, for example:
+index = 100 + temperatureDeviation + turbidityPenalty;
+
+instead of:
+index = 100 - (temperatureDeviation + turbidityPenalty);
+
+The program may compile successfully, but it produces an incorrect result. This makes it a semantic/logical error.
+3.7 Compilation Lifecycle
+The C program goes through several stages before becoming an executable program.
+Stage	Input	Output
+Preprocessing	C source code	Expanded source code
+Compilation	Preprocessed source	Assembly code
+Assembly	Assembly code	Object file
+Linking	Object file + libraries	Executable program
+
+
+The preprocessor handles directives such as #include. The compiler converts the processed C code into assembly instructions. The assembler converts the assembly instructions into machine-level object code. Finally, the linker combines the object code with required libraries to create the executable program.
+4. Question 2 – Mobile Money Transaction Processing
+4.1 Objective
+Question 2 required the development of a simple mobile-money transaction system for an agent.
+The program allows the user to:
+1. Deposit money.
+2. Withdraw money.
+3. Check the balance.
+4. View transaction statistics.
+5. Exit the system.
+4.2 Implementation
+The program uses variables to store the customer's balance, transaction amounts, transaction counts, and menu selection.
+A loop keeps the system running so that the agent can perform multiple transactions without restarting the program.
+A switch statement is used to process the selected menu option.
+The program also validates transactions to prevent:
+- Negative deposit amounts.
+- Negative withdrawal amounts.
+- Withdrawals greater than the available balance.
+4.3 Control Flow
+The program uses a loop to repeatedly display the menu.
+switch is used to determine which operation should be performed.
+continue is used when invalid input is detected so that the program returns to the menu.
+break is used to exit the relevant control structure, including terminating the main transaction loop when the user selects Exit.
+Insert Question 2 code screenshot here
+Figure 3: Question 2 C source code
+4.4 Sample Output
+The test demonstrates several operations, including a valid deposit, an invalid withdrawal, and a balance inquiry.
+Insert Question 2 terminal screenshot here
+Figure 4: Question 2 sample output
+The invalid withdrawal is rejected when the requested amount is greater than the available balance.
+5. Question 3 – Functions and Recursive Problem Solving
+5.1 Objective
+Question 3 required a delivery-distance analysis program.
+The program stores the distances of multiple delivery routes in an integer array and calculates useful information about the routes.
+The program calculates:
+- Total distance.
+- Average distance.
+- Longest route.
+- Number of routes above a specified distance limit.
+- Recursive sum of the distances.
+5.2 Functions
+The program is divided into separate functions so that each function performs a specific task.
+For example:
+calculateTotal()
+calculateAverage()
+findLongest()
+countAboveLimit()
+recursiveSum()
+
+This makes the program easier to understand, test, and maintain.
+5.3 Recursive Function
+The recursive function calculates the sum of the array.
+The function has a base case that stops recursion when there are no more elements to process.
+Conceptually:
+If there are no elements:
+    return 0
+
+Otherwise:
+    return current element + recursive sum of remaining elements
+
+Each recursive call reduces the number of elements being processed, eventually reaching the base case.
+Insert Question 3 code screenshot here
+Figure 5: Question 3 C source code
+5.4 Sample Output
+For example, using the provided values:
+Distances: 12 25 18 40 15 30
+Distance limit: 20
+
+The expected results are:
+===== DELIVERY DISTANCE ANALYSIS =====
+
+Total distance: 140 km
+Average distance: 23.33 km
+Longest route: 40 km
+Routes above 20 km: 3
+
+Recursive sum: 140 km
+
+Insert Question 3 terminal screenshot here
+Figure 6: Question 3 sample output
+5.5 Advantage of Recursion
+One advantage of recursion is that it can provide a simple and clear solution for problems that can naturally be divided into smaller versions of the same problem.
+5.6 Limitation of Recursion
+A limitation is that recursion uses additional memory for function calls. For very large inputs, excessive recursion can result in high memory usage or stack overflow.
+6. Question 4 – Arduino Smart Parking System
+6.1 Objective
+Question 4 involved designing and simulating a smart parking-space monitoring system using an Arduino Uno.
+The system detects whether a vehicle is within a predefined distance of the ultrasonic sensor and provides a visual and audio indication of the parking status.
+The required data flow is:
+Ultrasonic Sensor
+        ↓
+    Arduino Uno
+        ↓
+Decision / Processing
+     ↙       ↘
+   LEDs     Buzzer
+
+6.2 Components Used
+The system uses:
+- Arduino Uno
+- Ultrasonic distance sensor
+- Green LED
+- Red LED
+- Buzzer
+- Resistors
+- Breadboard
+- Jumper wires
+6.3 Component Roles
+Ultrasonic Sensor
+The ultrasonic sensor measures the distance between the sensor and an object, such as a vehicle.
+Arduino Uno
+The Arduino acts as the controller. It receives the distance measurement, processes it, and decides whether the parking space is available or occupied.
+Green LED
+The green LED indicates that the parking space is available.
+Red LED
+The red LED indicates that the parking space is occupied.
+Buzzer
+The buzzer provides an audio alert when a vehicle is detected within the defined occupancy threshold.
+6.4 Decision / Processing
+A distance threshold is used to determine the parking status.
+For example:
+If distance > threshold:
+    Green LED ON
+    Red LED OFF
+    Buzzer OFF
+
+If distance <= threshold:
+    Green LED OFF
+    Red LED ON
+    Buzzer ON
+
+This decision-making process is performed by the Arduino after receiving the measurement from the ultrasonic sensor.
+6.5 Arduino Source Code
+Insert your Arduino code screenshot here
+Figure 7: Arduino smart parking source code
+Make sure the actual .ino code is also included in your GitHub repository, not just the screenshot.
+6.6 Circuit Design
+Insert your Tinkercad circuit screenshot here
+Figure 8: Tinkercad smart parking circuit
+The circuit connects the ultrasonic sensor to the Arduino, while the Arduino controls the two LEDs and buzzer based on the measured distance.
+6.7 Block Diagram
+Use this as your block diagram:
+┌──────────────────────┐
+│  Ultrasonic Sensor   │
+│  Distance Detection  │
+└──────────┬───────────┘
+           │
+           │ Distance
+           ↓
+┌──────────────────────┐
+│     Arduino Uno      │
+│  Decision/Processing │
+└──────────┬───────────┘
+           │
+       ┌───┴────┐
+       │        │
+       ↓        ↓
+┌──────────┐ ┌─────────┐
+│   LEDs   │ │ Buzzer  │
+└──────────┘ └─────────┘
+
+6.8 Simulation Test Cases
+Test Case 1 – Parking Space Available
+When the simulated vehicle is outside the defined threshold:
+Green LED: ON
+Red LED: OFF
+Buzzer: OFF
+
+This indicates that the parking space is available.
+Insert screenshot here
+Figure 9: Parking space available
+Test Case 2 – Parking Space Occupied
+When the simulated vehicle is within the defined threshold:
+Green LED: OFF
+Red LED: ON
+Buzzer: ON
+
+This indicates that the parking space is occupied.
+Insert screenshot here
+Figure 10: Parking space occupied
+7. Testing and Results
+Testing was performed on the C programs and the Arduino simulation.
+For the C programs, test runs were used to verify that calculations, conditions, loops, functions, and recursive operations produced the expected results.
+For the Arduino system, different simulated distances were tested to verify that the system correctly changed the LEDs and buzzer according to the parking-space condition.
+The results demonstrated that the programs and simulation responded according to the defined requirements.
+8. Challenges Encountered
+During the project, some challenges were encountered while compiling and testing the programs and setting up the Arduino simulation.
+One challenge was understanding the difference between C source files and executable programs when running programs through the terminal. The source code must first be compiled before the resulting executable can be run.
+Another challenge was setting up the Arduino circuit correctly and understanding the relationship between the sensor, Arduino processing logic, LEDs, and buzzer.
+These challenges provided practical experience with debugging, compilation, circuit connections, and embedded-system programming.
+9. Conclusion
+This project provided practical experience in applying C programming concepts to different problems.
+Questions 1–3 demonstrated the use of variables, calculations, conditionals, loops, functions, arrays, input validation, and recursion. Question 4 extended these programming concepts into an embedded-system environment using an Arduino Uno and ultrasonic sensor.
+The project also provided experience with compiling C programs, testing program outputs, debugging errors, designing an Arduino circuit, and using Git and GitHub to organize and submit the project.
+Overall, the project demonstrated how fundamental C programming concepts can be applied to practical systems such as sensor monitoring, mobile-money transactions, logistics analysis, and smart parking systems.
+10. GitHub Repository
+The complete project files, source code, screenshots, and Arduino work are organized in the project repository:
+Programming in C – Project 1 Assignment
+https://github.com/Liata-Ornella/Programming-in-c-Project-1_Assignment
